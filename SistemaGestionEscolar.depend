@@ -1,0 +1,59 @@
+# depslib dependency file v1.0
+1749500704 source:d:\maxi\programacion\utn - tup\programacion 2\proyecto\sistemagestionescolar\alumno.cpp
+	<iostream>
+	<cstring>
+	"Alumno.h"
+
+1749510320 d:\maxi\programacion\utn - tup\programacion 2\proyecto\sistemagestionescolar\alumno.h
+	"Fecha.h"
+
+1749510320 d:\maxi\programacion\utn - tup\programacion 2\proyecto\sistemagestionescolar\fecha.h
+
+1749510320 source:d:\maxi\programacion\utn - tup\programacion 2\proyecto\sistemagestionescolar\archivoalumno.cpp
+	<fstream>
+	"ArchivoAlumno.h"
+
+1749510320 d:\maxi\programacion\utn - tup\programacion 2\proyecto\sistemagestionescolar\archivoalumno.h
+	"Alumno.h"
+
+1749510420 source:d:\maxi\programacion\utn - tup\programacion 2\proyecto\sistemagestionescolar\archivocurso.cpp
+	<fstream>
+	"ArchivoCurso.h"
+
+1749510420 d:\maxi\programacion\utn - tup\programacion 2\proyecto\sistemagestionescolar\archivocurso.h
+	"Curso.h"
+
+1749510320 d:\maxi\programacion\utn - tup\programacion 2\proyecto\sistemagestionescolar\curso.h
+
+1749510420 source:d:\maxi\programacion\utn - tup\programacion 2\proyecto\sistemagestionescolar\archivoinscripcion.cpp
+	<fstream>
+	"ArchivoInscripcion.h"
+
+1749510420 d:\maxi\programacion\utn - tup\programacion 2\proyecto\sistemagestionescolar\archivoinscripcion.h
+	"Inscripcion.h"
+
+1749510320 d:\maxi\programacion\utn - tup\programacion 2\proyecto\sistemagestionescolar\inscripcion.h
+	"Fecha.h"
+
+1749510320 source:d:\maxi\programacion\utn - tup\programacion 2\proyecto\sistemagestionescolar\curso.cpp
+	<iostream>
+	<cstring>
+	"Curso.h"
+
+1749510320 source:d:\maxi\programacion\utn - tup\programacion 2\proyecto\sistemagestionescolar\fecha.cpp
+	<iostream>
+	"Fecha.h"
+
+1749510320 source:d:\maxi\programacion\utn - tup\programacion 2\proyecto\sistemagestionescolar\inscripcion.cpp
+	<iostream>
+	"Inscripcion.h"
+
+1749510420 source:d:\maxi\programacion\utn - tup\programacion 2\proyecto\sistemagestionescolar\main.cpp
+	<iostream>
+	"Alumno.h"
+	"Curso.h"
+	"Inscripcion.h"
+	"ArchivoAlumno.h"
+	"ArchivoCurso.h"
+	"ArchivoInscripcion.h"
+
