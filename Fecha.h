@@ -1,15 +1,25 @@
 #ifndef FECHA_H
 #define FECHA_H
 
+#include <string>
+
 class Fecha {
 private:
-    int dia, mes, anio;
+    int _dia, _mes, _anio;
+
 public:
-    void cargar();
-    void mostrar() const;
+    Fecha();
+    Fecha(int dia, int mes, int anio);
+
     int getDia() const;
     int getMes() const;
     int getAnio() const;
+
+    void setDia(int dia);
+    void setMes(int mes);
+    void setAnio(int anio);
+
+    std::string toString() const;
 };
 
 #endif

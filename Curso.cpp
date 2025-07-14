@@ -5,27 +5,27 @@
 using namespace std;
 
 void Curso::cargar() {
-    cout << "Número de curso: ";
+    cout << "Numero de curso: ";
     cin >> numeroCurso;
     cin.ignore();
-    cout << "Descripción: ";
+    cout << "Descripcion: ";
     cin.getline(descripcion, 90);
     cout << "Aula: ";
     cin >> aula;
     cin.ignore();
     cout << "Docente: ";
     cin.getline(docente, 40);
-    cout << "Cantidad máxima de alumnos: ";
+    cout << "Cantidad maxima de alumnos: ";
     cin >> maxAlumnos;
     cin.ignore();
 }
 
 void Curso::mostrar() const {
-    cout << "Número de curso: " << numeroCurso << endl;
-    cout << "Descripción: " << descripcion << endl;
+    cout << "Numero de curso: " << numeroCurso << endl;
+    cout << "Descripcion: " << descripcion << endl;
     cout << "Aula: " << aula << endl;
     cout << "Docente: " << docente << endl;
-    cout << "Máximo de alumnos: " << maxAlumnos << endl;
+    cout << "Maximo de alumnos: " << maxAlumnos << endl;
 }
 
 int Curso::getNumeroCurso() const { return numeroCurso; }

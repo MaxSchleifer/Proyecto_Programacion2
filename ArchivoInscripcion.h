@@ -1,17 +1,17 @@
-#ifndef ARCHIVOINSCRIPCION_H
-#define ARCHIVOINSCRIPCION_H
-
+#pragma once
+#include <string>
 #include "Inscripcion.h"
 
 class ArchivoInscripcion {
 private:
-    const char* nombreArchivo;
+    std::string _nombreArchivo;
 
 public:
-    ArchivoInscripcion(const char* n = "inscripciones.dat");
-    Inscripcion leer(int pos);
-    bool grabar(const Inscripcion& i);
-    int cantidad();
+    ArchivoInscripcion(std::string nombreArchivo = "inscripciones.dat");
+    bool Guardar(Inscripcion inscripcion);
+    bool Guardar(Inscripcion inscripcion, int posicion);
+    int BuscarPorLegajoYCurso(int legajo, int numeroCurso);
+    Inscripcion Leer(int posicion);
+    int CantidadRegistros();
+    void LeerTodos(int cantidadRegistros, Inscripcion* vector);
 };
-
-#endif

@@ -1,47 +1,79 @@
-#include <fstream>
 #include "ArchivoAlumno.h"
+#include <cstdio>
 
-ArchivoAlumno::ArchivoAlumno(const char* n) {
-    nombreArchivo = n;
+ArchivoAlumno::ArchivoAlumno(std::string nombreArchivo) {
+    _nombreArchivo = nombreArchivo;
 }
 
-Alumno ArchivoAlumno::leer(int pos) {
-    Alumno a;
-    std::ifstream file(nombreArchivo, std::ios::binary);
-    if (file) {
-        file.seekg(pos * sizeof(Alumno));
-        file.read(reinterpret_cast<char*>(&a), sizeof(Alumno));
-        file.close();
+bool ArchivoAlumno::Guardar(Alumno alumno) {
+    FILE *pArchivo = fopen(_nombreArchivo.c_str(), "ab");
+    if(pArchivo == NULL) {
+        return false;
     }
-    return a;
+    bool ok = fwrite(&alumno, sizeof(Alumno), 1, pArchivo);
+    fclose(pArchivo);
+    return ok;
 }
 
-bool ArchivoAlumno::grabar(const Alumno& a) {
-    std::ofstream file(nombreArchivo, std::ios::app | std::ios::binary);
-    if (!file) return false;
-    file.write(reinterpret_cast<const char*>(&a), sizeof(Alumno));
-    file.close();
-    return true;
+bool ArchivoAlumno::Guardar(Alumno alumno, int posicion) {
+    FILE *pArchivo = fopen(_nombreArchivo.c_str(), "rb+");
+    if(pArchivo == NULL) {
+        return false;
+    }
+    fseek(pArchivo, sizeof(Alumno) * posicion, SEEK_SET);
+    bool ok = fwrite(&alumno, sizeof(Alumno), 1, pArchivo);
+    fclose(pArchivo);
+    return ok;
 }
 
-int ArchivoAlumno::buscarPorLegajo(int legajo) {
-    Alumno a;
-    std::ifstream file(nombreArchivo, std::ios::binary);
+int ArchivoAlumno::BuscarPorLegajo(int legajo) {
+    FILE *pArchivo = fopen(_nombreArchivo.c_str(), "rb");
+    if(pArchivo == NULL) {
+        return -1;
+    }
+    Alumno alumno;
     int i = 0;
-    while (file.read(reinterpret_cast<char*>(&a), sizeof(Alumno))) {
-        if (a.getLegajo() == legajo) {
-            file.close();
+    while(fread(&alumno, sizeof(Alumno), 1, pArchivo)) {
+        if(alumno.getLegajo() == legajo) {
+            fclose(pArchivo);
             return i;
         }
         i++;
     }
-    file.close();
+    fclose(pArchivo);
     return -1;
 }
 
-int ArchivoAlumno::cantidad() {
-    std::ifstream file(nombreArchivo, std::ios::binary | std::ios::ate);
-    int bytes = file.tellg();
-    file.close();
-    return bytes / sizeof(Alumno);
+Alumno ArchivoAlumno::Leer(int posicion) {
+    FILE *pArchivo = fopen(_nombreArchivo.c_str(), "rb");
+    if(pArchivo == NULL) {
+        return Alumno();
+    }
+    Alumno alumno;
+    fseek(pArchivo, sizeof(Alumno) * posicion, SEEK_SET);
+    fread(&alumno, sizeof(Alumno), 1, pArchivo);
+    fclose(pArchivo);
+    return alumno;
+}
+
+int ArchivoAlumno::CantidadRegistros() {
+    FILE *pArchivo = fopen(_nombreArchivo.c_str(), "rb");
+    if(pArchivo == NULL) {
+        return 0;
+    }
+    fseek(pArchivo, 0, SEEK_END);
+    int cantidad = ftell(pArchivo) / sizeof(Alumno);
+    fclose(pArchivo);
+    return cantidad;
+}
+
+void ArchivoAlumno::LeerTodos(int cantidadRegistros, Alumno* vector) {
+    FILE *pArchivo = fopen(_nombreArchivo.c_str(), "rb");
+    if(pArchivo == NULL) {
+        return;
+    }
+    for(int i = 0; i < cantidadRegistros; i++) {
+        fread(&vector[i], sizeof(Alumno), 1, pArchivo);
+    }
+    fclose(pArchivo);
 }

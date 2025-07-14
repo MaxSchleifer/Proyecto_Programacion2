@@ -1,18 +1,17 @@
-#ifndef ARCHIVOALUMNO_H
-#define ARCHIVOALUMNO_H
-
+#pragma once
+#include <string>
 #include "Alumno.h"
 
 class ArchivoAlumno {
 private:
-    const char* nombreArchivo;
+    std::string _nombreArchivo;
 
 public:
-    ArchivoAlumno(const char* n = "alumnos.dat");
-    Alumno leer(int pos);
-    bool grabar(const Alumno& a);
-    int buscarPorLegajo(int legajo);
-    int cantidad();
+    ArchivoAlumno(std::string nombreArchivo = "alumnos.dat");
+    bool Guardar(Alumno alumno);
+    bool Guardar(Alumno alumno, int posicion);
+    int BuscarPorLegajo(int legajo);
+    Alumno Leer(int posicion);
+    int CantidadRegistros();
+    void LeerTodos(int cantidadRegistros, Alumno* vector);
 };
-
-#endif

@@ -1,18 +1,17 @@
-#ifndef ARCHIVOCURSO_H
-#define ARCHIVOCURSO_H
-
+#pragma once
+#include <string>
 #include "Curso.h"
 
 class ArchivoCurso {
 private:
-    const char* nombreArchivo;
+    std::string _nombreArchivo;
 
 public:
-    ArchivoCurso(const char* n = "cursos.dat");
-    Curso leer(int pos);
-    bool grabar(const Curso& c);
-    int buscarPorNumeroCurso(int numeroCurso);
-    int cantidad();
+    ArchivoCurso(std::string nombreArchivo = "cursos.dat");
+    bool Guardar(Curso curso);
+    bool Guardar(Curso curso, int posicion);
+    int BuscarPorNumero(int numeroCurso);
+    Curso Leer(int posicion);
+    int CantidadRegistros();
+    void LeerTodos(int cantidadRegistros, Curso* vector);
 };
-
-#endif

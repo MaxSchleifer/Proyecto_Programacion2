@@ -1,82 +1,88 @@
 #include <iostream>
-#include "Alumno.h"
-#include "Curso.h"
-#include "Inscripcion.h"
 #include "ArchivoAlumno.h"
 #include "ArchivoCurso.h"
 #include "ArchivoInscripcion.h"
 
-using namespace std;
-
-void menu() {
-    cout << "=== Sistema de Gestión Escolar ===\n";
-    cout << "1. Cargar Alumno\n";
-    cout << "2. Listar Alumnos\n";
-    cout << "3. Cargar Curso\n";
-    cout << "4. Listar Cursos\n";
-    cout << "5. Cargar Inscripción\n";
-    cout << "6. Listar Inscripciones\n";
-    cout << "0. Salir\n";
-    cout << "Seleccione una opción: ";
+void mostrarMenu() {
+    std::cout << "\n--- SISTEMA DE GESTION ESCOLAR ---\n";
+    std::cout << "1. Cargar Alumno\n";
+    std::cout << "2. Listar Alumnos\n";
+    std::cout << "3. Cargar Curso\n";
+    std::cout << "4. Listar Cursos\n";
+    std::cout << "5. Cargar Inscripcion\n";
+    std::cout << "6. Listar Inscripciones\n";
+    std::cout << "0. Salir\n";
+    std::cout << "Seleccione opcion: ";
 }
 
 int main() {
-    ArchivoAlumno archAlu;
-    ArchivoCurso archCurso;
-    ArchivoInscripcion archInsc;
+    ArchivoAlumno archAlu("alumnos.dat");
+    ArchivoCurso archCurso("cursos.dat");
+    ArchivoInscripcion archInsc("inscripciones.dat");
 
     int opcion;
     do {
-        menu();
-        cin >> opcion;
-        cin.ignore();
+        mostrarMenu();
+        std::cin >> opcion;
+        std::cin.ignore();
 
         switch(opcion) {
             case 1: {
                 Alumno a;
                 a.cargar();
-                archAlu.grabar(a);
+                archAlu.Guardar(a);
                 break;
             }
             case 2: {
-                for (int i = 0; i < archAlu.cantidad(); i++) {
-                    Alumno a = archAlu.leer(i);
-                    a.mostrar();
-                    cout << "------------------\n";
+                int cant = archAlu.CantidadRegistros();
+                Alumno* alumnos = new Alumno[cant];
+                archAlu.LeerTodos(cant, alumnos);
+
+                for(int i = 0; i < cant; i++) {
+                    alumnos[i].mostrar();
+                    std::cout << "------------------\n";
                 }
+                delete[] alumnos;
                 break;
             }
             case 3: {
                 Curso c;
                 c.cargar();
-                archCurso.grabar(c);
+                archCurso.Guardar(c);
                 break;
             }
             case 4: {
-                for (int i = 0; i < archCurso.cantidad(); i++) {
-                    Curso c = archCurso.leer(i);
-                    c.mostrar();
-                    cout << "------------------\n";
+                int cant = archCurso.CantidadRegistros();
+                Curso* cursos = new Curso[cant];
+                archCurso.LeerTodos(cant, cursos);
+
+                for(int i = 0; i < cant; i++) {
+                    cursos[i].mostrar();
+                    std::cout << "------------------\n";
                 }
+                delete[] cursos;
                 break;
             }
             case 5: {
                 Inscripcion i;
                 i.cargar();
-                archInsc.grabar(i);
+                archInsc.Guardar(i);
                 break;
             }
             case 6: {
-                for (int i = 0; i < archInsc.cantidad(); i++) {
-                    Inscripcion ins = archInsc.leer(i);
-                    ins.mostrar();
-                    cout << "------------------\n";
+                int cant = archInsc.CantidadRegistros();
+                Inscripcion* inscripciones = new Inscripcion[cant];
+                archInsc.LeerTodos(cant, inscripciones);
+
+                for(int i = 0; i < cant; i++) {
+                    inscripciones[i].mostrar();
+                    std::cout << "------------------\n";
                 }
+                delete[] inscripciones;
                 break;
             }
         }
-    } while (opcion != 0);
+    } while(opcion != 0);
 
-    cout << "Gracias por usar el sistema.\n";
     return 0;
 }
